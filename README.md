@@ -1,25 +1,19 @@
 # The Subreddit Vibe Check
 
-Understand the mood, sentiment, and emotional tone behind the hottest conversations on Reddit in real-time.
+Understand the mood behind the hottest conversations on Reddit.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-secureid--identity--access.vercel.app-blue?style=for-the-badge&logo=vercel)](https://secureid-identity-access.vercel.app)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-secureid--identity--access-181717?style=for-the-badge&logo=github)](https://github.com/kumarnallana/secureid-identity-access)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-subreddit--vibe--check--app.vercel.app-blue?style=for-the-badge&logo=vercel)](https://subreddit-vibe-check-app.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-The--Subreddit--Vibe--Check-181717?style=for-the-badge&logo=github)](https://github.com/kumarnallana/The-Subreddit-Vibe-Check)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
 
 ---
 
-## Live Deployment & Vercel Identity
+## Live Deployment Details
 
-| Property | Value |
-| :--- | :--- |
-| **Live Production URL** | [https://secureid-identity-access.vercel.app](https://secureid-identity-access.vercel.app) |
-| **Vercel Account** | `sasi-kumar-nallana` ([vercel.com/sasi-kumar-nallana/secureid-identity-access](https://vercel.com/sasi-kumar-nallana/secureid-identity-access)) |
-| **Vercel Project Name** | `secureid-identity-access` |
-| **GitHub Repository** | [https://github.com/kumarnallana/secureid-identity-access](https://github.com/kumarnallana/secureid-identity-access) |
-| **Developer / Author** | Nallana Sasi Kumar ([sasikumarnallana956@gmail.com](mailto:sasikumarnallana956@gmail.com)) |
-
-> **Project Identity Update:** This deployment has been renamed to **`secureid-identity-access`** under the **`sasi-kumar-nallana`** Vercel account. The repository configuration, environment definitions, and documentation are now synchronized with this project identity.
+- **Production URL:** [https://subreddit-vibe-check-app.vercel.app](https://subreddit-vibe-check-app.vercel.app)
+- **Vercel Account:** `sasi-kumar-nallana` (Sasi Kumar Nallana)
+- **Vercel Project Name:** `redroot-subreddit-vibe-check`
+- **GitHub Repository:** [kumarnallana/The-Subreddit-Vibe-Check](https://github.com/kumarnallana/The-Subreddit-Vibe-Check)
 
 ---
 
@@ -38,7 +32,6 @@ Understand the mood, sentiment, and emotional tone behind the hottest conversati
 - **Shareable State & Deep Linking:** Dynamically syncs state with URL query parameters (`/?subreddit=reactjs`) for effortless bookmarking and sharing.
 - **Adaptive Demo Mode:** Built-in synthetic dataset provider enabling full local UI exploration and end-to-end verification without requiring Reddit developer keys.
 - **Interactive Professional Resume:** Embedded interactive resume accessible directly within the app at `/resume`.
-- **Automated E2E Test Suite:** Complete end-to-end browser tests powered by **Playwright** validating core flows, rendering, navigation, and responsiveness.
 
 ---
 
@@ -77,7 +70,7 @@ Next.js Route Handler (Edge-Ready Proxy)
 | **Icons** | Lucide React |
 | **NLP Engine** | `sentiment` (AFINN-165 vocabulary) |
 | **Testing** | Playwright Test |
-| **Deployment** | Vercel (`secureid-identity-access`) |
+| **Deployment** | Vercel (`redroot-subreddit-vibe-check` / `subreddit-vibe-check-app.vercel.app`) |
 
 ---
 
@@ -91,18 +84,18 @@ Next.js Route Handler (Edge-Ready Proxy)
 
 ```bash
 # Clone the repository
-git clone https://github.com/kumarnallana/secureid-identity-access.git
+git clone https://github.com/kumarnallana/The-Subreddit-Vibe-Check.git
 
 # Navigate to project directory
-cd secureid-identity-access
+cd The-Subreddit-Vibe-Check
 
 # Install dependencies
 npm install
 ```
 
-> **Git Remote Configuration:** If your local repository remote still points to an older name, update your remote URL:
+> **Note on Renamed Repositories:** If your local git remote still references the old name, update it via:
 > ```bash
-> git remote set-url origin https://github.com/kumarnallana/secureid-identity-access.git
+> git remote set-url origin https://github.com/kumarnallana/The-Subreddit-Vibe-Check.git
 > ```
 
 ---
@@ -127,8 +120,19 @@ REDDIT_CLIENT_ID=your_client_id_here
 REDDIT_CLIENT_SECRET=your_client_secret_here
 
 # Required User-Agent compliant with Reddit Developer Guidelines
-REDDIT_USER_AGENT=web:secureid-identity-access:v1.0.0 (by /u/YOUR_USERNAME)
+REDDIT_USER_AGENT=web:redroot-subreddit-vibe-check:v1.0.0 (by /u/YOUR_USERNAME)
 ```
+
+---
+
+## Running Locally
+
+```bash
+# Start Next.js development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
@@ -143,20 +147,9 @@ This application connects using the **OAuth2 Client Credentials** flow as mandat
    REDDIT_DATA_SOURCE=api
    REDDIT_CLIENT_ID=your_client_id
    REDDIT_CLIENT_SECRET=your_client_secret
-   REDDIT_USER_AGENT=web:secureid-identity-access:v1.0.0 (by /u/yourusername)
+   REDDIT_USER_AGENT=web:redroot-subreddit-vibe-check:v1.0.0 (by /u/yourusername)
    ```
 4. Restart the server (`npm run dev`). The application detects the credentials and pulls live Reddit OAuth data.
-
----
-
-## Running Locally
-
-```bash
-# Start Next.js development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
@@ -201,5 +194,5 @@ npx playwright test
 - **Email:** [sasikumarnallana956@gmail.com](mailto:sasikumarnallana956@gmail.com)
 - **LinkedIn:** [linkedin.com/in/sasi-kumar-nallana](https://www.linkedin.com/in/sasi-kumar-nallana)
 - **GitHub:** [github.com/kumarnallana](https://github.com/kumarnallana)
-- **Live App:** [https://secureid-identity-access.vercel.app](https://secureid-identity-access.vercel.app)
-- **Resume:** Accessible online at [https://secureid-identity-access.vercel.app/resume](https://secureid-identity-access.vercel.app/resume)
+- **Live App:** [https://subreddit-vibe-check-app.vercel.app](https://subreddit-vibe-check-app.vercel.app)
+- **Resume:** Accessible online at [https://subreddit-vibe-check-app.vercel.app/resume](https://subreddit-vibe-check-app.vercel.app/resume)

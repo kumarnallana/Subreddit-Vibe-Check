@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ExternalLink, MessageCircle, ArrowUp, TrendingUp, Minus, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SENTIMENT_CONFIG, FILTER_TABS, SORT_OPTIONS } from '@/data/constants';
 
 export function PostList({ posts }) {
   const [filter, setFilter] = useState('all');
@@ -26,19 +27,15 @@ export function PostList({ posts }) {
   });
 
   const getSentimentBadge = (label) => {
-    switch (label) {
-      case 'positive': return { color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', Icon: TrendingUp };
-      case 'negative': return { color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', Icon: TrendingDown };
-      default: return { color: 'text-slate-400', bg: 'bg-slate-500/10', border: 'border-slate-500/20', Icon: Minus };
-    }
+    return SENTIMENT_CONFIG[label] || SENTIMENT_CONFIG.neutral;
   };
 
-  const filterTabs = [
-    { id: 'all', label: 'All', count: posts.length },
-    { id: 'positive', label: 'Positive', count: posts.filter(p => p.sentiment.label === 'positive').length },
-    { id: 'neutral', label: 'Neutral', count: posts.filter(p => p.sentiment.label === 'neutral').length },
-    { id: 'negative', label: 'Negative', count: posts.filter(p => p.sentiment.label === 'negative').length },
-  ];
+  const filterTabsWithCounts = FILTER_TABS.map(tab => ({
+    ...tab,
+    count: tab.id === 'all' 
+      ? posts.length 
+      : posts.filter(p => p.sentiment.label === tab.id).length
+  }));
 
   return (
     <div className="mt-12">
@@ -54,7 +51,7 @@ export function PostList({ posts }) {
         <div className="flex flex-wrap items-center gap-3">
           {/* Segmented Control Filter */}
           <div className="flex p-1 bg-slate-800/90 rounded-xl border border-white/5" role="tablist" aria-label="Sentiment Filters">
-            {filterTabs.map((tab) => {
+            {filterTabsWithCounts.map((tab) => {
               const isActive = filter === tab.id;
               return (
                 <button
@@ -95,9 +92,9 @@ export function PostList({ posts }) {
             aria-label="Sort posts by"
             className="rounded-xl border border-white/5 bg-slate-800/90 px-3 py-1.5 text-xs font-medium text-slate-200 focus:border-blue-500/50 focus:outline-none focus-ring cursor-pointer"
           >
-            <option value="score_desc">Highest Reddit Score</option>
-            <option value="sentiment_desc">Highest Sentiment Score</option>
-            <option value="sentiment_asc">Lowest Sentiment Score</option>
+            {SORT_OPTIONS.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </select>
         </div>
       </div>

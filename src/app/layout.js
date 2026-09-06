@@ -1,7 +1,7 @@
-import './globals.css';
+import '@/styles/globals.css';
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
-import { LenisProvider } from '@/components/LenisProvider';
+import { LenisProvider } from '@/components/layout/LenisProvider';
 import { Activity, Mail, FileText, ArrowUpRight } from 'lucide-react';
 
 const inter = Inter({ subsets: ['latin'] });

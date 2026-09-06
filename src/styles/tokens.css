@@ -1,0 +1,26 @@
+@layer base {
+  :root {
+    /* Surfaces */
+    --surface-background: 15 23 42; /* slate-900 */
+    --surface-foreground: 30 41 59; /* slate-800 */
+    
+    /* Brand Colors */
+    --brand-primary: 59 130 246; /* blue-500 */
+    --brand-secondary: 79 70 229; /* indigo-600 */
+    
+    /* Semantic Colors */
+    --semantic-success: 16 185 129; /* emerald-500 */
+    --semantic-error: 244 63 94; /* rose-500 */
+    --semantic-warning: 245 158 11; /* amber-500 */
+    
+    /* Text */
+    --text-primary: 248 250 252; /* slate-50 */
+    --text-secondary: 148 163 184; /* slate-400 */
+    --text-tertiary: 100 116 139; /* slate-500 */
+    
+    /* Spacing & Layout */
+    --spacing-container-padding: 2rem;
+    --border-radius-base: 0.5rem;
+    --border-radius-large: 1rem;
+  }
+}

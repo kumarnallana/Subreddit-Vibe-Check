@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
 
                 {/* GitHub Repository Link */}
                 <a
-                  href="https://github.com/kumarnallana/SportsOrca-online-Assessment"
+                  href="https://github.com/kumarnallana/The-Subreddit-Vibe-Check"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-lg border border-white/5 bg-slate-800/60 px-3 py-1.5 text-xs font-medium text-slate-300 transition-colors hover:border-white/10 hover:bg-slate-700 hover:text-white focus-ring"

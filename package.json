@@ -1,7 +1,12 @@
 {
-  "name": "redroot-subreddit-vibe-check",
+  "name": "secureid-identity-access",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://secureid-identity-access.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kumarnallana/secureid-identity-access.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -29,10 +34,5 @@
     "eslint-config-next": "16.3.1",
     "tailwindcss": "^4",
     "typescript": "^6.0.3"
-  },
-  "homepage": "https://subreddit-vibe-check-app.vercel.app",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kumarnallana/The-Subreddit-Vibe-Check.git"
   }
 }

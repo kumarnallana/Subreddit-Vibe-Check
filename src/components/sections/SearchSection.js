@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Search, X, CornerDownLeft } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 export function SearchSection({ onSearch, isFetching, initialValue = '' }) {
   const [input, setInput] = useState(initialValue);
@@ -38,18 +40,50 @@ export function SearchSection({ onSearch, isFetching, initialValue = '' }) {
 
   const sampleSubreddits = ['technology', 'programming', 'webdev', 'reactjs'];
 
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+    tl.fromTo(
+      '.hero-title',
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, delay: 0.1 }
+    )
+    .fromTo(
+      '.hero-subtitle',
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8 },
+      '-=0.8'
+    )
+    .fromTo(
+      '.search-container',
+      { y: 20, opacity: 0, scale: 0.98 },
+      { y: 0, opacity: 1, scale: 1, duration: 0.8 },
+      '-=0.7'
+    )
+    .fromTo(
+      '.quick-try-items > *',
+      { y: 15, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, stagger: 0.05 },
+      '-=0.6'
+    );
+  }, { scope: containerRef });
+
   return (
-    <div className="mx-auto w-full max-w-2xl text-center">
-      <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-br from-slate-50 via-slate-100 to-slate-400">
+    <div ref={containerRef} className="mx-auto w-full max-w-2xl text-center relative z-10">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/10 blur-[100px] -z-10 rounded-full opacity-50 pointer-events-none mix-blend-screen" />
+      
+      <h1 className="hero-title mb-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-br from-slate-50 via-slate-100 to-slate-400">
         Analyze the Vibe
       </h1>
-      <p className="mb-10 text-base sm:text-lg text-slate-300">
+      <p className="hero-subtitle mb-10 text-base sm:text-lg text-slate-300">
         Understand the mood and sentiment behind the hottest conversations on Reddit.
       </p>
 
       <form 
         onSubmit={handleSubmit} 
-        className="relative flex items-center shadow-2xl shadow-blue-900/10 rounded-full border border-white/10 bg-slate-800/60 p-2 backdrop-blur-xl transition-all duration-200 focus-within:border-blue-500/50 focus-within:bg-slate-800/90 focus-within:ring-4 focus-within:ring-blue-500/10"
+        className="search-container relative flex items-center shadow-2xl shadow-blue-900/20 rounded-full border border-white/10 bg-slate-800/40 p-2 backdrop-blur-2xl transition-all duration-300 hover:border-white/20 hover:bg-slate-800/60 focus-within:border-blue-500/50 focus-within:bg-slate-800/80 focus-within:ring-4 focus-within:ring-blue-500/10"
         role="search"
         aria-label="Search Subreddit"
       >
@@ -109,7 +143,7 @@ export function SearchSection({ onSearch, isFetching, initialValue = '' }) {
       </form>
 
       {/* Suggested Pill Buttons */}
-      <div className="mt-8 flex flex-wrap justify-center items-center gap-2.5 text-sm text-slate-400">
+      <div className="quick-try-items mt-8 flex flex-wrap justify-center items-center gap-2.5 text-sm text-slate-400">
         <span className="text-slate-500 text-xs uppercase tracking-widest font-semibold mr-1 select-none">Quick Try</span>
         {sampleSubreddits.map((sub) => (
           <button

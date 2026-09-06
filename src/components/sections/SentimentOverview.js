@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { TrendingUp, Minus, TrendingDown } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '@/animations/variants';
 
 export function SentimentOverview({ stats }) {
   const chartRef = useRef(null);
@@ -101,10 +102,21 @@ export function SentimentOverview({ stats }) {
   if (!stats) return null;
 
   return (
-    <div className="mt-6 grid gap-4 lg:grid-cols-3">
+    <motion.div 
+      variants={staggerContainer}
+      initial="hidden"
+      animate="show"
+      className="mt-6 grid gap-4 lg:grid-cols-3"
+    >
       {/* Vibe Meter Panel */}
-      <div className="rounded-2xl border border-white/5 bg-slate-800/50 p-6 sm:p-7 lg:col-span-2 flex flex-col justify-between">
-        <div>
+      <motion.div 
+        variants={fadeInUp}
+        className="relative overflow-hidden rounded-2xl border-t border-l border-white/10 border-r border-b border-black/20 bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-6 sm:p-7 lg:col-span-2 flex flex-col justify-between shadow-xl backdrop-blur-md"
+      >
+        {/* Subtle glow */}
+        <div className="absolute -inset-x-20 -top-20 h-[100px] w-[50%] rotate-12 bg-white/5 blur-3xl pointer-events-none" />
+        
+        <div className="relative z-10">
           <span className="text-xs font-semibold tracking-wider text-slate-400 uppercase">Overall Vibe</span>
           <div className="mt-1.5 flex flex-wrap items-baseline gap-3">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">{stats.vibe}</h2>
@@ -122,13 +134,16 @@ export function SentimentOverview({ stats }) {
           </div>
           <div ref={chartRef} className="w-full h-[40px]" />
         </div>
-      </div>
+      </motion.div>
 
       {/* Sentiment Distribution Summary */}
-      <div className="rounded-2xl border border-white/5 bg-slate-800/50 p-6 sm:p-7 flex flex-col justify-between">
-        <span className="text-xs font-semibold tracking-wider text-slate-400 uppercase mb-4">Distribution</span>
+      <motion.div 
+        variants={fadeInUp}
+        className="relative overflow-hidden rounded-2xl border-t border-l border-white/10 border-r border-b border-black/20 bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-6 sm:p-7 flex flex-col justify-between shadow-xl backdrop-blur-md"
+      >
+        <span className="relative z-10 text-xs font-semibold tracking-wider text-slate-400 uppercase mb-4">Distribution</span>
         
-        <div className="flex flex-col gap-4">
+        <div className="relative z-10 flex flex-col gap-4">
           {/* Positive Bar */}
           <div>
             <div className="flex items-center justify-between text-xs font-medium mb-1">
@@ -171,7 +186,7 @@ export function SentimentOverview({ stats }) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

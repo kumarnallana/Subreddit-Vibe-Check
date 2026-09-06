@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ExternalLink, MessageCircle, ArrowUp, TrendingUp, Minus, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { SENTIMENT_CONFIG, FILTER_TABS, SORT_OPTIONS } from '@/data/constants';
 
 export function PostList({ posts }) {
@@ -37,8 +39,31 @@ export function PostList({ posts }) {
       : posts.filter(p => p.sentiment.label === tab.id).length
   }));
 
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    // Scroll trigger batch animation for posts
+    gsap.utils.toArray('.post-card-animate').forEach((card, i) => {
+      gsap.fromTo(card,
+        { opacity: 0, y: 30, scale: 0.98 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top bottom-=50',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    });
+  }, { scope: containerRef, dependencies: [sortedPosts] });
+
   return (
-    <div className="mt-12">
+    <div ref={containerRef} className="mt-12">
       {/* Controls Bar */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-lg font-bold tracking-tight text-white flex items-center gap-2">
@@ -114,9 +139,12 @@ export function PostList({ posts }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
-                className="group relative flex flex-col gap-3 rounded-xl border border-white/5 bg-slate-800/40 p-4 sm:p-5 sm:flex-row sm:items-start transition-all duration-150 hover:border-white/10 hover:bg-slate-800/70"
+                className="post-card-animate group relative flex flex-col gap-3 rounded-2xl border-t border-l border-white/10 border-r border-b border-black/20 bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 sm:p-5 sm:flex-row sm:items-start shadow-lg backdrop-blur-md transition-all duration-200 hover:from-slate-700/80 hover:to-slate-800/80 hover:scale-[1.01]"
               >
-                <div className="flex-1 min-w-0">
+                {/* Hover Glow */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent" />
+                
+                <div className="flex-1 min-w-0 relative z-10">
                   <div className="flex items-center gap-2 text-xs text-slate-400 mb-1.5">
                     <span className="font-medium text-slate-300">u/{post.author || 'reddit_user'}</span>
                     <span aria-hidden="true">•</span>
@@ -155,10 +183,10 @@ export function PostList({ posts }) {
                     href={redditUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center h-7 w-7 rounded-lg bg-slate-700/40 text-slate-400 opacity-80 sm:opacity-0 transition-all hover:bg-slate-700 hover:text-white group-hover:opacity-100 focus:opacity-100 focus-ring"
+                    className="flex items-center justify-center h-8 w-8 rounded-full bg-slate-700/40 text-slate-400 opacity-80 sm:opacity-0 sm:translate-x-4 transition-all duration-300 hover:bg-blue-600 hover:text-white group-hover:opacity-100 group-hover:translate-x-0 focus:opacity-100 focus-ring shadow-sm"
                     aria-label={`View "${post.title}" on Reddit`}
                   >
-                    <ExternalLink className="h-3.5 w-3.5" />
+                    <ExternalLink className="h-4 w-4" />
                   </a>
                 </div>
               </motion.div>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { TrendingUp, TrendingDown, Minus, BarChart2, Activity, Layers3 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
+import { staggerContainer, fadeInUp } from '@/animations/variants';
 
 function AnimatedNumber({ value, isFloat = false }) {
   const ref = useRef(null);
@@ -103,12 +104,22 @@ export function StatsGrid({ stats }) {
   ];
 
   return (
-    <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+    <motion.div 
+      variants={staggerContainer}
+      initial="hidden"
+      animate="show"
+      className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-4"
+    >
       {cards.map((card, i) => (
-        <div 
+        <motion.div 
+          variants={fadeInUp}
           key={i} 
-          className="group relative overflow-hidden rounded-2xl border border-white/5 bg-slate-800/50 p-5 transition-all duration-150 hover:border-white/10 hover:bg-slate-800/80"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="group relative overflow-hidden rounded-2xl border-t border-l border-white/10 border-r border-b border-black/20 bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-5 shadow-xl backdrop-blur-md transition-colors hover:from-slate-700/80 hover:to-slate-800/80"
         >
+          {/* Subtle inner glow */}
+          <div className="absolute -inset-x-20 -top-20 h-[100px] w-full rotate-12 bg-white/5 blur-2xl pointer-events-none" />
           <div className="flex items-center gap-4">
             <div className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-xl", card.bg, card.color)} aria-hidden="true">
               <card.icon className="h-5 w-5" />
@@ -125,8 +136,8 @@ export function StatsGrid({ stats }) {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
